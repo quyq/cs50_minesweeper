@@ -51,6 +51,7 @@ lost = False
 # Show instructions initially
 instructions = True
 button_color = WHITE
+last_move = None
 while True:
 
     # Check if game quit
@@ -121,9 +122,13 @@ while True:
             elif (i, j) in flags:
                 screen.blit(flag, rect)
             elif (i, j) in revealed:
+                if (i, j) == last_move:
+                    font_color = RED
+                else:
+                    font_color = BLACK
                 neighbors = smallFont.render(
                     str(game.nearby_mines((i, j))),
-                    True, BLACK
+                    True, font_color
                 )
                 neighborsTextRect = neighbors.get_rect()
                 neighborsTextRect.center = rect.center
@@ -202,6 +207,7 @@ while True:
             flags = set()
             lost = False
             button_color = WHITE
+            last_move = None
             continue
 
         # User-made move
@@ -215,6 +221,7 @@ while True:
 
     # Make move and update AI knowledge
     if move:
+        last_move = move
         if game.is_mine(move):
             lost = True
             button_color = RED
