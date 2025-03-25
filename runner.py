@@ -12,6 +12,8 @@ MINES = 8
 BLACK = (0, 0, 0)
 GRAY = (180, 180, 180)
 WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
 
 # Create game
 pygame.init()
@@ -48,7 +50,7 @@ lost = False
 
 # Show instructions initially
 instructions = True
-
+button_color = WHITE
 while True:
 
     # Check if game quit
@@ -138,7 +140,7 @@ while True:
     buttonText = mediumFont.render("AI Move", True, BLACK)
     buttonRect = buttonText.get_rect()
     buttonRect.center = aiButton.center
-    pygame.draw.rect(screen, WHITE, aiButton)
+    pygame.draw.rect(screen, button_color, aiButton)
     screen.blit(buttonText, buttonRect)
 
     # Reset button
@@ -199,6 +201,7 @@ while True:
             revealed = set()
             flags = set()
             lost = False
+            button_color = WHITE
             continue
 
         # User-made move
@@ -214,9 +217,13 @@ while True:
     if move:
         if game.is_mine(move):
             lost = True
+            button_color = RED
         else:
             nearby = game.nearby_mines(move)
             revealed.add(move)
             ai.add_knowledge(move, nearby)
-
+            if ai.make_safe_move() is None:
+                button_color = WHITE
+            else:
+                button_color = GREEN
     pygame.display.flip()
