@@ -94,8 +94,8 @@ class Sentence():
     def __init__(self, cells, count):
         self.cells = set(cells)
         self.count = count
-        self.mines = set()
-        self.safes = set()
+        #self.mines = set()
+        #self.safes = set()
         '''# Below may not necessary but the submission requires it.
         # And because of this, has to update MinesweeperAI's mines and safes while adding new sentence. 
         if len(self.cells) == count:
@@ -112,7 +112,7 @@ class Sentence():
     def __str__(self):
         return f"{self.cells} = {self.count}"
 
-    def known_mines(self):
+    '''def known_mines(self):
         """
         Returns the set of all cells in self.cells known to be mines.
         """
@@ -122,7 +122,7 @@ class Sentence():
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        return self.safes
+        return self.safes'''
 
     def mark_mine(self, cell):
         """
@@ -131,7 +131,7 @@ class Sentence():
         """
         if cell in self.cells:
             self.cells.remove(cell)
-            self.mines.add(cell)
+            #self.mines.add(cell)
             self.count -= 1
 
     def mark_safe(self, cell):
@@ -141,7 +141,7 @@ class Sentence():
         """
         if cell in self.cells:
             self.cells.remove(cell)
-            self.safes.add(cell)
+            #self.safes.add(cell)
 
 
 class MinesweeperAI():
