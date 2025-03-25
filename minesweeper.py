@@ -96,7 +96,7 @@ class Sentence():
         self.count = count
         self.mines = set()
         self.safes = set()
-        # Below may not necessary but the submission requires it.
+        '''# Below may not necessary but the submission requires it.
         # And because of this, has to update MinesweeperAI's mines and safes while adding new sentence. 
         if len(self.cells) == count:
             self.mines = set(self.cells)
@@ -104,7 +104,7 @@ class Sentence():
             self.count = 0
         elif count == 0:
             self.safes = set(self.cells)
-            self.cells = set()
+            self.cells = set()'''
 
     def __eq__(self, other):
         return self.cells == other.cells and self.count == other.count
@@ -208,11 +208,11 @@ class MinesweeperAI():
                     neighbors.add((i, j))
         new_sentence = Sentence(neighbors, count)
         self.knowledge.append(new_sentence)
-        # no need below two loops if above line 101~107 are removed
+        '''# no need below two loops if above line 101~107 are removed
         for cell in new_sentence.mines:
             self.mines.add(cell)
         for cell in new_sentence.safes:
-            self.safes.add(cell)
+            self.safes.add(cell)'''
         need_refresh_knowledge = True
         while need_refresh_knowledge:
             need_refresh_knowledge = False
